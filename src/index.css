@@ -1,1 +1,17 @@
 @import 'tailwindcss';
+
+
+@theme {
+    --color-primary : #5C7AFF;
+    --color-secondary : #4A8FE7;
+    --color-accent: #000000;
+    --color-neutral : #FAF9F7;
+    --color-sidebar: #070E2D;
+    --color-active-link:#0E1C5B;
+    --color-primary-font-family: "Inter", sans-serif;
+    --color-login-input:rgba(217, 217, 217, 0.6);
+}
+
+*{
+    font-family: var(--color-primary-font-family);
+}
