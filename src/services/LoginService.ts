@@ -8,7 +8,7 @@ const LoginService = () => ({
     login : async ({ username , password } : LoginServiceProps) => {
         try {
             const response = await axiosInstance.post<LoginServiceResponse>("/user/login",{ username , password });
-            if(response.status === 200){
+            if(response){
                 localStorage.setItem(ACCESS_TOKEN_NAME,response.data.token);
                 localStorage.setItem(USER_INFO_NAME,JSON.stringify(response.data.user));
             }
