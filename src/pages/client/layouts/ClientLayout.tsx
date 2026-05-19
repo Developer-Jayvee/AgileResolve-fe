@@ -14,7 +14,7 @@ export default function ClientLayout(){
         <div className="h-screen w-full bg-neutral">
             <AsideBar/>
             <TopNav/>
-            <main className="pl-40 pt-12">
+            <main className="pl-40 pt-12 h-full">
                 <Outlet/>
             </main>
         </div>

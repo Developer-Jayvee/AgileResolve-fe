@@ -38,3 +38,9 @@
 {
     width:3px;
 }
+th{ font-weight: normal;}
+table ,
+th
+{
+    background-color: transparent;
+}
