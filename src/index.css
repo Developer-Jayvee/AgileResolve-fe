@@ -15,3 +15,26 @@
 *{
     font-family: var(--color-primary-font-family);
 }
+
+.links li a {
+    position: relative;
+}
+.links li a.active {
+    background-color: var(--color-active-link);
+    font-weight: bold;
+}
+.links li a::after{
+    width:0;
+    content:"";
+    position: absolute;
+    right:0;
+    top:0;
+    bottom: 0;
+    background-color: white;
+    transition: width 100ms ease-in-out;
+}
+.links li a:hover::after,
+.links li a.active::after
+{
+    width:3px;
+}
