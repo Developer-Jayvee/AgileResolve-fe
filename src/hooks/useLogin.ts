@@ -1,11 +1,13 @@
 import { useEffect, useState, type FormEvent } from "react";
 import useInputHandler from "./useInputHandler";
 import LoginService from "@/services/LoginService";
+import { useNavigate } from "react-router-dom";
 
 export default function useLogin() {
   const { login } = LoginService();
+  const navigate = useNavigate();
   const [errors, setErrors] = useState(null);
-    const [successMessage , setSuccessMessage] = useState(null);
+  const [successMessage , setSuccessMessage] = useState(null);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [canSubmit, setCanSubmit] = useState<boolean>(false);
   const { handleInput, initStateForm, setInitStateForm } = useInputHandler<{
@@ -34,10 +36,16 @@ export default function useLogin() {
             setErrors(data?.message)
             return false;
         }
-        setSuccessMessage(result?.message);
+        if(result){
+          setSuccessMessage(result?.message);
+          setTimeout( () => {
+            navigate('client',{replace : true})
+          },1500)
+        }
     })
     .finally( () => {
-        setLoading(false)
+        setLoading(false);
+        // navigate('/client',{ replace : true});
     })
   };
 

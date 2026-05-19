@@ -4,11 +4,18 @@ import ClientLayout from "@/pages/client/layouts/ClientLayout";
 import Dashboard from "@/pages/client/dasboard/Dashboard";
 import Project from "@/pages/client/project/Project";
 import Ticket from "@/pages/client/ticket/Ticket";
+import LoginLayout from "@/pages/login/layouts/LoginLayout";
 
 export const Routes = createBrowserRouter([
     {
         path:"/",
-        element:<LoginPage/>
+        element:<LoginLayout/>,
+        children:[
+            {
+                index:true,
+                element:<LoginPage/>
+            }
+        ]
     },
     {
         path:"/client",
