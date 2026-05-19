@@ -27,3 +27,9 @@ export interface InputTextProps {
 
     onInputChange ?: (value : string , name : string) => void;
 }
+
+export interface PageLinksProps {
+    customClass ?: string;
+    pageNumber : number;
+    isActive ?: boolean;
+}
