@@ -7,6 +7,7 @@ export default function Button({
   buttonType = "button",
   customClass = "disabled:bg-blue-400 bg-primary hover:bg-secondary text-white p-3 text-[17px] ",
   isLoading = false,
+  onClick = () => false
 }: ButtonProps) {
   const [btnText, setBtnText] = useState(buttonText);
   const [isBtnDisabled, setBtnDisabled] = useState(isDisabled);
@@ -21,6 +22,7 @@ export default function Button({
   }, [isLoading]);
   return (
     <button
+      onClick={() => onClick()}
       type={buttonType}
       disabled={isBtnDisabled}
       className={`disabled:cursor-not-allowed cursor-pointer ${customClass}`}

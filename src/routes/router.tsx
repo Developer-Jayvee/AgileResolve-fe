@@ -31,7 +31,7 @@ export const Routes = createBrowserRouter([
             },
             {
                 path:"project",
-                element:<Project/>
+                element:<Project/>,
             },
             {
                 path:"ticket",
