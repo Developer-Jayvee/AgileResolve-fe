@@ -49,10 +49,20 @@ export default function useProjectHandler(){
             setResponse(data);
         }
     }
+
+    const deleteProject = async (id : number) => {
+        const action = confirm("Are you sure you want to delete this project?");
+        if(!action) return;
+
+       return await ProjectService.delete(id)
+       .then((result) => result.data)
+       .catch((error) => false)
+    }
     return {
         handleInput,
         handleSubmit,
         getProjectList,
+        deleteProject,
         successMessage,
         initStateForm,
         errors,

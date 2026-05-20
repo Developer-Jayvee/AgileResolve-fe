@@ -1,16 +1,18 @@
-import { BiFolder } from "react-icons/bi";
-import { CiMenuKebab } from "react-icons/ci";
+import { BiFolder, BiTrash } from "react-icons/bi";
 
 
 interface ProjectCardProps {
+    id : number;
     title : string;
     description ?: string;
+
+    onDelete : (id : number) => void;
 }
 export default function ProjectCard({
-    title , description = ""
+   id, title , description = "" ,onDelete
 } : ProjectCardProps) {
-
-    return <div className="my-3 h-20 w-full border border-gray-300 rounded-lg shadow p-2">
+    
+    return <div className="hover:bg-neutral cursor-pointer my-3 h-20 w-full border border-gray-300 rounded-lg shadow p-2">
         <div className="w-full h-full grid grid-cols-[1fr_250px_1fr_1fr_1fr] place-content-center place-items-center">
             <div className="flex items-center gap-2">
                 <div className="bg-amber-200 p-2 rounded-md">
@@ -31,7 +33,9 @@ export default function ProjectCard({
                 <p>May 22 2026</p>
             </div>
             <div>
-                <CiMenuKebab />
+                <button onClick={() => onDelete(id)} className=" flex justify-center cursor-pointer bg-red-500 hover:bg-red-600 text-white p-2 rounded-xl">
+                    <BiTrash/>
+                </button>
             </div>
         </div>
     </div>
