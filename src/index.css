@@ -10,6 +10,7 @@
     --color-active-link:#0E1C5B;
     --color-primary-font-family: "Inter", sans-serif;
     --color-login-input:rgba(217, 217, 217, 0.6);
+    --animate-slide-left: slide-left .7s ease-in-out;
 }
 
 *{
@@ -43,4 +44,15 @@ table ,
 th
 {
     background-color: transparent;
+}
+
+.right-modal{
+    transform: translateX(0);
+}
+
+@keyframes slide-left{
+    0% { transform : translateX(110%);}
+    100% {
+        transform: translateX(0);
+    }
 }

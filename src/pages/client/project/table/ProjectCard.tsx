@@ -2,7 +2,13 @@ import { BiFolder } from "react-icons/bi";
 import { CiMenuKebab } from "react-icons/ci";
 
 
-export default function ProjectCard() {
+interface ProjectCardProps {
+    title : string;
+    description ?: string;
+}
+export default function ProjectCard({
+    title , description = ""
+} : ProjectCardProps) {
 
     return <div className="my-3 h-20 w-full border border-gray-300 rounded-lg shadow p-2">
         <div className="w-full h-full grid grid-cols-[1fr_250px_1fr_1fr_1fr] place-content-center place-items-center">
@@ -10,10 +16,10 @@ export default function ProjectCard() {
                 <div className="bg-amber-200 p-2 rounded-md">
                     <BiFolder className="text-2xl text-blue-500" />
                 </div>
-                <p>School System</p>
+                <p>{title}</p>
             </div>
             <div className=" w-full">
-                <p className="overflow-hidden text-ellipsis">School Website for De La Salle</p>
+                <p className="text-center overflow-hidden text-ellipsis">{description}</p>
             </div>
             <div>
                 <div className="flex gap-1 items-center justify-center">
