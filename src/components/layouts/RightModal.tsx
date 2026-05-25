@@ -1,7 +1,7 @@
 import { RiCloseFill } from "react-icons/ri";
 import type { RightModalProps } from "@/types/ComponentTypes";
 import { useContext } from "react";
-import { RightModalContext } from "@/pages/client/layouts/ClientLayout";
+import { RightModalContext } from "@/contexts";
 
 
 export default function RightModal({
