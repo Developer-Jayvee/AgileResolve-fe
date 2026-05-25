@@ -5,6 +5,7 @@ import Dashboard from "@/pages/client/dasboard/Dashboard";
 import Project from "@/pages/client/project/Project";
 import Ticket from "@/pages/client/ticket/Ticket";
 import LoginLayout from "@/pages/login/layouts/LoginLayout";
+import ViewProject from "@/pages/client/project/view/ViewProject";
 
 export const Routes = createBrowserRouter([
     {
@@ -31,7 +32,11 @@ export const Routes = createBrowserRouter([
             },
             {
                 path:"project",
-                element:<Project/>,
+                element:<Project/>
+            },
+            {
+                 path:"project/view/:id",
+                element:<ViewProject/>
             },
             {
                 path:"ticket",

@@ -2,9 +2,9 @@ import Button from "@/components/Button";
 import DefaultInputText from "@/components/DefaultInputText";
 import DefaultTextArea from "@/components/DefaultTextArea";
 import useProjectHandler from "@/hooks/useProjectHandler";
-import { useContext, useEffect, useId } from "react";
-import { ProjectContext } from "../../layouts/ClientLayout";
+import { useContext, useEffect } from "react";
 import DefaultSelect from "@/components/DefaultSelect";
+import { ProjectContext } from "@/contexts";
 
 const CreateProject = () => {
     const { setList } = useContext(ProjectContext);

@@ -16,7 +16,9 @@
 *{
     font-family: var(--color-primary-font-family);
 }
-
+button {
+    cursor: pointer;
+}
 .links li a {
     position: relative;
 }

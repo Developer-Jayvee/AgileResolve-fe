@@ -1,23 +1,15 @@
 import AsideBar from "@/components/layouts/AsideBar";
 import RightModal from "@/components/layouts/RightModal";
 import TopNav from "@/components/layouts/TopNav";
+import { ProjectContext, RightModalContext } from "@/contexts";
 import useAuthorizeRoute from "@/hooks/useAuthorizeRoute";
 import useProjectHandler from "@/hooks/useProjectHandler";
-import type { ProjectContextProps, RightModalContextProps } from "@/types/ContextTypes";
 import type { StoreProjectResponseProps } from "@/types/ProjectServiceTypes";
-import { createContext, type ReactNode, useEffect, useMemo, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 
-export const RightModalContext = createContext<RightModalContextProps>({
-    isOpen : false,
-    setOpen : () => false,
-    setChildren : () => <></>
-});
-export const ProjectContext = createContext<ProjectContextProps>({
-    list : [],
-    setList : () => []
-});
+
 export default function ClientLayout(){
     const {  isAuthorized } = useAuthorizeRoute()
     const { getProjectList, response } = useProjectHandler();
@@ -44,7 +36,6 @@ export default function ClientLayout(){
 
     useEffect( () => {
         setProjectList(response);
-        console.log(response);
         
     },[response])
 

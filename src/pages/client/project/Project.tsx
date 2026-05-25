@@ -2,9 +2,9 @@ import Button from "@/components/Button";
 import Pagination from "@/components/Pagination/Pagination";
 import ProjectList from "@/pages/client/project/table/ProjectList";
 import { NavLink } from "react-router-dom";
-import { RightModalContext } from "../layouts/ClientLayout";
 import { useContext } from "react";
 import CreateProject from "./create/CreateProject";
+import { RightModalContext } from "@/contexts";
 
 
 
