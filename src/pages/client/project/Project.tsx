@@ -4,13 +4,14 @@ import ProjectList from "@/pages/client/project/table/ProjectList";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import CreateProject from "./create/CreateProject";
-import { RightModalContext } from "@/contexts";
+import { ModalContext } from "@/contexts";
 
 
 
 export default function Project() {
-    const { setOpen, setChildren } = useContext(RightModalContext);
-    const handleOpenModal = () => {
+    const { rightModal } = useContext(ModalContext);
+    const { setChildren , setOpen } = rightModal;
+    const handleRightModal = () => {
         setChildren(<CreateProject/>);
         setOpen(true);
     }
@@ -22,7 +23,7 @@ export default function Project() {
             </div>
             <div>
                 <NavLink to="/create"></NavLink>
-                <Button onClick={() => handleOpenModal()} buttonText="+ New Project" customClass="disabled:bg-blue-400 bg-primary hover:bg-secondary rounded-sm  text-white p-2 text-[14px]" />
+                <Button onClick={() => handleRightModal()} buttonText="+ New Project" customClass="disabled:bg-blue-400 bg-primary hover:bg-secondary rounded-sm  text-white p-2 text-[14px]" />
             </div>
         </div>
         <div className="grid grid-cols-1 grid-rows-[1fr_50px] gap-y-6 max-h-full h-full shadow-2xl bg-white p-4 rounded-md">

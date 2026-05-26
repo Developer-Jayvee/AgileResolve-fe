@@ -1,13 +1,11 @@
 import { RiCloseFill } from "react-icons/ri";
-import type { RightModalProps } from "@/types/ComponentTypes";
 import { useContext } from "react";
-import { RightModalContext } from "@/contexts";
+import { ModalContext } from "@/contexts";
 
 
-export default function RightModal({
-    isOpen = false , children
-} : RightModalProps) {
-    const {  setOpen } = useContext(RightModalContext)
+export default function RightModal() {
+    const { rightModal } = useContext(ModalContext)
+    const { setOpen , isOpen , children } = rightModal;
     if(!isOpen) return null
 
     return <div className="fixed top-0 bottom-0 left-0 right-0 bg-black/50 ">
@@ -19,7 +17,6 @@ export default function RightModal({
             </div>
             <div className="w-full h-full  flex flex-col p-2">
                     {children}
-                
             </div>
         </div>
     </div>

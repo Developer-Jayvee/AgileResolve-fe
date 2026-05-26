@@ -2,12 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { StoreProjectResponseProps } from "@/types/ProjectServiceTypes";
 import ViewProjectHeader from "./ViewProjectHeader";
+import { ModalContext, ProjectContext } from "@/contexts";
+import { BiPlus } from "react-icons/bi";
+import TicketsTable from "../table/Ticket/TicketsTable";
 import { initStoreResponse } from "@/constants/initStates";
-import { ProjectContext } from "@/contexts";
 
 
 const ViewProject = () => {
     const { list } = useContext(ProjectContext)
+    const { centerModal } = useContext(ModalContext);
     const [projectInfo, setProjectInfo] = useState<StoreProjectResponseProps>(initStoreResponse);
     const { id } = useParams();
 
@@ -19,12 +22,30 @@ const ViewProject = () => {
         }
     },[list])
     
+    const handleOpenCenterModal = () => {
+        centerModal.setChildren(<></>)
+        centerModal.setOpen(true);
+        centerModal.setModalSize('xl');
+    }
+
     if(projectInfo ===  null) return null;
-    
+
     return <div className=" h-full p-2">
         <div className="grid grid-rows-[150px_1fr] w-full h-full bg-white border border-gray-300 shadow-2xl">
             <ViewProjectHeader project={projectInfo} />
-            <div className="h-full"></div>
+            <div className="h-full p-3">
+                <div className="w-full flex flex-col gap-5">
+                    <div className="flex justify-end">
+                        <div>
+                            <button onClick={() => handleOpenCenterModal()} className="flex items-center gap-2 disabled:bg-blue-400 bg-primary hover:bg-secondary rounded-sm  text-white p-2 text-[14px]">
+                                <BiPlus/>
+                                <p>Create Ticket</p>
+                            </button>
+                        </div>
+                    </div>
+                    <TicketsTable/>
+                </div>
+            </div>
         </div>
     </div>
 }
