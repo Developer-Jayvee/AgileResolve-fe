@@ -1,11 +1,11 @@
-import type { ProjectContextProps, RightModalContextProps } from "@/types/ContextTypes";
+import { initModal } from "@/constants/initStates";
+import type { ModalContextProps, ProjectContextProps } from "@/types/ContextTypes";
 import { createContext } from "react";
 
 
-export const RightModalContext = createContext<RightModalContextProps>({
-    isOpen : false,
-    setOpen : () => false,
-    setChildren : () => <></>
+export const ModalContext = createContext<ModalContextProps>({
+   rightModal : initModal,
+   centerModal : initModal
 });
 
 export const ProjectContext = createContext<ProjectContextProps>({

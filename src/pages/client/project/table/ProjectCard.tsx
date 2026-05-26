@@ -1,4 +1,5 @@
 import { BiFolder, BiTrash } from "react-icons/bi";
+import { FaEye } from "react-icons/fa";
 
 
 interface ProjectCardProps {
@@ -15,13 +16,13 @@ export default function ProjectCard({
     
     return <div className="hover:bg-neutral cursor-pointer my-3 h-20 w-full border border-gray-300 rounded-lg shadow p-2">
         <div className="w-full h-full grid grid-cols-[1fr_250px_1fr_1fr_1fr] place-content-center place-items-center">
-            <div  onClick={() => onView(id) } className="flex items-center gap-2">
+            <div  className=" flex items-center gap-2">
                 <div className="bg-amber-200 p-2 rounded-md">
                     <BiFolder className="text-2xl text-blue-500" />
                 </div>
                 <p>{title}</p>
             </div>
-            <div  onClick={() => onView(id) } className=" w-full">
+            <div  className=" w-full ">
                 <p className="text-center overflow-hidden text-ellipsis">{description}</p>
             </div>
             <div  onClick={() => onView(id) }>
@@ -33,7 +34,10 @@ export default function ProjectCard({
             <div  onClick={() => onView(id) }>
                 <p>May 22 2026</p>
             </div>
-            <div>
+            <div className="flex gap-2">
+                <button  onClick={() => onView(id) } className="flex justify-center items-center p-2 rounded-xl cursor-pointer text-white bg-green-500 hover:bg-green-600 ">
+                    <FaEye/>
+                </button>
                 <button onClick={() => onDelete(id)} className=" flex justify-center cursor-pointer bg-red-500 hover:bg-red-600 text-white p-2 rounded-xl">
                     <BiTrash/>
                 </button>

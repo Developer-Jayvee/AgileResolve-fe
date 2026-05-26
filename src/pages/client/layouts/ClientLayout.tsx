@@ -1,43 +1,28 @@
 import AsideBar from "@/components/layouts/AsideBar";
+import CenterModal from "@/components/layouts/CenterModal";
 import RightModal from "@/components/layouts/RightModal";
 import TopNav from "@/components/layouts/TopNav";
-import { ProjectContext, RightModalContext } from "@/contexts";
-import useAuthorizeRoute from "@/hooks/useAuthorizeRoute";
-import useProjectHandler from "@/hooks/useProjectHandler";
-import type { StoreProjectResponseProps } from "@/types/ProjectServiceTypes";
-import { type ReactNode, useEffect, useMemo, useState } from "react";
+import { ProjectContext, ModalContext } from "@/contexts";
+import useClient from "@/hooks/useClient";
+import {  useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 
 
 export default function ClientLayout(){
-    const {  isAuthorized } = useAuthorizeRoute()
-    const { getProjectList, response } = useProjectHandler();
-    const [isRightModalOpen , setRightModalOpen] = useState<boolean>(false);
-    const [modalContent , setModalContent] = useState<ReactNode >(<></>);
-    const [projectList , setProjectList] = useState<StoreProjectResponseProps[]>([]);
-
-
-    const modalContext = useMemo( () => ({
-        isOpen : isRightModalOpen,
-        setOpen : setRightModalOpen,
-        setChildren : setModalContent
-    }),[isRightModalOpen]);
-
-    const projectContext = useMemo( () => ({
-        list : projectList,
-        setList : setProjectList
-    }),[projectList]);
-
+    const {
+        isAuthorized,
+        getProjectList, response,
+        modalContext,
+        projectContext,
+        setProjectList,
+    } = useClient();
+  
 
     useEffect( () => {
         getProjectList()
     },[])
-
-    useEffect( () => {
-        setProjectList(response);
-        
-    },[response])
+    useEffect( () => setProjectList(response),[response])
 
 
     if(isAuthorized === null) return null;
@@ -47,14 +32,13 @@ export default function ClientLayout(){
             <AsideBar/>
             <TopNav/>
             <ProjectContext.Provider value={projectContext}>
-                <RightModalContext.Provider value={modalContext}>
+                <ModalContext.Provider value={modalContext}>
                     <main className="pl-40 pt-12 h-full">
                         <Outlet/>
                     </main>
-                    <RightModal isOpen={isRightModalOpen}>
-                        {modalContent}
-                    </RightModal>
-                </RightModalContext.Provider>
+                    <RightModal />
+                    <CenterModal/>
+                </ModalContext.Provider>
             </ProjectContext.Provider>
         </div>
     )

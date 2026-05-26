@@ -1,4 +1,4 @@
-import type { ChangeEvent, ReactNode } from "react";
+import type { ChangeEvent, Dispatch, ReactNode } from "react";
 
 export type ButtonTypes = "button" | "submit" | "reset" | undefined;
 export type InputTextTypes = "text" | "password";
@@ -79,4 +79,9 @@ export interface DefaultSelectProps extends Omit<DefaultInputTextProps,"input"> 
     options : SelectOptionProps[];
     onChangeInput?: (e: ChangeEvent<HTMLSelectElement>) => void;
   };
+}
+
+export interface CenterModalProps {
+  children : ReactNode;
+  isOpen ?: boolean;
 }

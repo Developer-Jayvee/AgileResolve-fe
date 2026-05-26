@@ -41,13 +41,15 @@ button {
 {
     width:3px;
 }
-th{ font-weight: normal;}
+th{ font-weight: 600; }
 table ,
 th
 {
     background-color: transparent;
 }
-
+.ticket-list-table td{
+    padding: 10px;
+}
 .right-modal{
     transform: translateX(0);
 }
