@@ -1,5 +1,4 @@
 import {
-  useEffect,
   useState,
   type Dispatch,
   type FormEvent,
@@ -31,11 +30,10 @@ export default function useSubmitForm<P, R>({
           const { data } = result.data;
           if (data) {
             setFormResponse(data);
-            if(appendToList){
-                setList((prev) => [...prev,data]);
+            if (appendToList) {
+              setList((prev) => [...prev, data]);
             }
           }
-          
         }
       })
       .catch((error) => {

@@ -24,7 +24,8 @@ export interface ModalContextProps {
 
 export interface ProjectContextProps {
     list : Array<StoreProjectResponseProps[]>;
-    setList : Dispatch<SetStateAction<StoreProjectResponseProps[]>>
+    setList : Dispatch<SetStateAction<StoreProjectResponseProps[]>>;
+    setProjectID : Dispatch<SetStateAction<string>>;
 }
 
 export interface TicketContextProps {

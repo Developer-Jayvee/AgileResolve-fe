@@ -16,7 +16,7 @@ export default function ProjectList() {
     });
   };
   const handleView = (id: number) => {
-    navigate(`view/${id}` , {replace : true});
+    navigate(`view/${id}`, { replace: true });
   };
   return (
     <div className="h-full grid grid-rows-[auto_1fr] gap-4">
@@ -42,11 +42,11 @@ export default function ProjectList() {
                 onDelete={(id: number) => handleDelete(id)}
                 key={index}
                 data={{
-                  title:projects.title,
-                  description:projects.description,
+                  title: projects.title,
+                  description: projects.description,
                   id: projects.id
                 }}
-               
+
               />
             ))}
           </div>
