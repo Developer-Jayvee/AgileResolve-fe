@@ -1,26 +1,25 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface InputHandlerProps<T> {
-    formData: T;
+  formData: T;
 }
-export default function useInputHandler<T>({ formData  } : InputHandlerProps<T>){
+export default function useInputHandler<T>({ formData }: InputHandlerProps<T>) {
+  const [initStateForm, setInitStateForm] = useState<T>(formData);
 
-    const [initStateForm , setInitStateForm] = useState<T>(formData);
-
-    const handleInput = (keyValue : keyof T , valueOf : string | number ) => {
-
-        
-        setInitStateForm( 
-            (prev) => ({
-                ...prev,
-                [keyValue] : valueOf
-            })
-        );
-    }
-
-    return {
-        handleInput,
-        initStateForm,
-        setInitStateForm
-    }
+  const handleInput = (keyValue: keyof T, valueOf: string | number) => {
+    setInitStateForm((prev) => ({
+      ...prev,
+      [keyValue]: valueOf,
+    }));
+  };
+  const resetForm = () => setInitStateForm(formData);
+  useEffect(() => {
+    console.log(initStateForm);
+  }, [initStateForm]);
+  return {
+    handleInput,
+    initStateForm,
+    setInitStateForm,
+    resetForm,
+  };
 }

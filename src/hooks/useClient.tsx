@@ -8,11 +8,14 @@ import useTicket from "./useTicket";
 
 
 export default function useClient() {
+    const [projectID , setProjectID] = useState<string>("");
     const { isAuthorized } = useAuthorizeRoute()
     const { getProjectList, response } = useProjectHandler();
     const { modalComponent , modalPosition , modalProps , modalSize ,open , close } = useModal()
     const [projectList, setProjectList] = useState<StoreProjectResponseProps[]>([initStoreResponse]);
-    const { formResponse , handleSubmit , initStateForm ,formLoading , handleInput } = useTicket();
+    const { formResponse , handleSubmit , initStateForm ,formLoading , handleInput } = useTicket({
+        projectID
+    });
 
     const modalContextProvider = ({
         open,
@@ -20,20 +23,19 @@ export default function useClient() {
     });
     const projectContext = useMemo(() => ({
         list: projectList,
-        setList: setProjectList
-    }), [projectList]);
+        setList: setProjectList,
+        setProjectID,
+    }), [projectList,projectID]);
     
     const ticketContext = useMemo( () => ({
         handleSubmit,
         initStateForm,
         formLoading,
-        handleInput
+        handleInput,
     }),[initStateForm]);
 
     useEffect( () => {
         if(formResponse){
-            console.log(formResponse);
-            
             setProjectList( 
                 (prev) => prev.map( (data) => 
                     formResponse.projects_id == data.id ? 
@@ -45,11 +47,13 @@ export default function useClient() {
         }
     },[formResponse])
  
+  
     return {
         isAuthorized,
         getProjectList, response,
         setProjectList,
         closeModal : close,
+        setProjectID,
         modalPosition,
         modalComponent,
         modalProps,
