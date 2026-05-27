@@ -9,11 +9,15 @@ import { ModalContext } from "@/contexts";
 
 
 export default function Project() {
-    const { rightModal } = useContext(ModalContext);
-    const { setChildren , setOpen } = rightModal;
+    const { open } = useContext(ModalContext);
     const handleRightModal = () => {
-        setChildren(<CreateProject/>);
-        setOpen(true);
+        open({
+            component: CreateProject,
+            props: {
+                isOpen: true
+            },
+            position: "right"
+        });
     }
     return <div className=" grid grid-cols-1 grid-rows-[100px_1fr] h-full gap-y-4 p-5">
         <div className="flex justify-between items-center">

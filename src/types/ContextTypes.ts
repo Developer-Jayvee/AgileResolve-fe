@@ -1,5 +1,6 @@
 import type { Dispatch, ReactNode, SetStateAction } from "react";
 import type { StoreProjectResponseProps } from "./ProjectServiceTypes";
+import type { PayloadTicketProps } from "./PayloadTypes";
 
 export interface RightModalContextProps {
     isOpen : boolean;
@@ -9,16 +10,26 @@ export interface RightModalContextProps {
 
 }
 export type ModalSize = "sm" | "md" | "lg" | "xl" | "auto";
-export interface ModalContextProps {
-    rightModal : RightModalContextProps;
-    centerModal : RightModalContextProps & {
-        size ?: ModalSize;
-        setModalSize : Dispatch<SetStateAction<ModalSize>>;
-    };
-}
+export type ModalPosition = "right" | "center";
 
+export interface ModalContextProps {
+    open : (config : {
+        component : any | null;
+        props : any;
+        position : ModalPosition;
+        size ?: ModalSize;
+    }) => void;
+
+}
 
 export interface ProjectContextProps {
     list : Array<StoreProjectResponseProps[]>;
     setList : Dispatch<SetStateAction<StoreProjectResponseProps[]>>
+}
+
+export interface TicketContextProps {
+    handleSubmit : () => void;
+    initStateForm: PayloadTicketProps;
+    formLoading : boolean;
+    handleInput : (key: keyof PayloadTicketProps,value : string | number) => void;
 }

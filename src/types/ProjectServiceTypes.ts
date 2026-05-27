@@ -1,3 +1,4 @@
+import type { TicketReturnType } from "./TicketTypes";
 
 
 export interface StoreProjectResponseProps {
@@ -8,6 +9,7 @@ export interface StoreProjectResponseProps {
     category : number;
     code : string;
     created_at : string;
+    tickets : TicketReturnType[];
 } 
 export interface PayloadProjectProps {
     title : string;

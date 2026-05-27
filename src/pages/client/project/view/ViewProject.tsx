@@ -6,14 +6,24 @@ import { ModalContext, ProjectContext } from "@/contexts";
 import { BiPlus } from "react-icons/bi";
 import TicketsTable from "../table/Ticket/TicketsTable";
 import { initStoreResponse } from "@/constants/initStates";
+import CreateTicket from "../create/CreateTicket";
 
 
 const ViewProject = () => {
-    const { list } = useContext(ProjectContext)
-    const { centerModal } = useContext(ModalContext);
-    const [projectInfo, setProjectInfo] = useState<StoreProjectResponseProps>(initStoreResponse);
     const { id } = useParams();
+    const { list } = useContext(ProjectContext)
+    const { open } = useContext(ModalContext);
+    const [ projectInfo , setProjectInfo ] = useState<StoreProjectResponseProps>(initStoreResponse);
 
+    
+    const handleOpenCenterModal = () => {
+        open({
+            component:CreateTicket,
+            props:{ },
+            position:'center',
+            size:"xl"
+        })
+    }
     useEffect( () => {
         if(list.length > 0){
             setProjectInfo(
@@ -21,13 +31,6 @@ const ViewProject = () => {
             );
         }
     },[list])
-    
-    const handleOpenCenterModal = () => {
-        centerModal.setChildren(<></>)
-        centerModal.setOpen(true);
-        centerModal.setModalSize('xl');
-    }
-
     if(projectInfo ===  null) return null;
 
     return <div className=" h-full p-2">
@@ -43,7 +46,7 @@ const ViewProject = () => {
                             </button>
                         </div>
                     </div>
-                    <TicketsTable/>
+                    <TicketsTable list={projectInfo.tickets}/>
                 </div>
             </div>
         </div>

@@ -2,16 +2,19 @@ import { BiFolder, BiTrash } from "react-icons/bi";
 import { FaEye } from "react-icons/fa";
 
 
-interface ProjectCardProps {
+interface DetailedProjectProps { 
     id : number;
     title : string;
     description ?: string;
 
+}
+interface ProjectCardProps {
+    data : DetailedProjectProps;
     onDelete : (id : number) => void;
     onView : (id : number) => void;
 }
 export default function ProjectCard({
-   id, title , description = "" , onDelete , onView
+   data , onDelete , onView
 } : ProjectCardProps) {
     
     return <div className="hover:bg-neutral cursor-pointer my-3 h-20 w-full border border-gray-300 rounded-lg shadow p-2">
@@ -20,25 +23,25 @@ export default function ProjectCard({
                 <div className="bg-amber-200 p-2 rounded-md">
                     <BiFolder className="text-2xl text-blue-500" />
                 </div>
-                <p>{title}</p>
+                <p>{data.title}</p>
             </div>
             <div  className=" w-full ">
-                <p className="text-center overflow-hidden text-ellipsis">{description}</p>
+                <p className="text-center overflow-hidden text-ellipsis">{data.description}</p>
             </div>
-            <div  onClick={() => onView(id) }>
+            <div >
                 <div className="flex gap-1 items-center justify-center">
                     <div className="w-2 h-2 rounded-full bg-green-500"></div>
                     <p>Active</p>
                 </div>
             </div>
-            <div  onClick={() => onView(id) }>
+            <div  >
                 <p>May 22 2026</p>
             </div>
             <div className="flex gap-2">
-                <button  onClick={() => onView(id) } className="flex justify-center items-center p-2 rounded-xl cursor-pointer text-white bg-green-500 hover:bg-green-600 ">
+                <button  onClick={() => onView(data.id) } className="flex justify-center items-center p-2 rounded-xl cursor-pointer text-white bg-green-500 hover:bg-green-600 ">
                     <FaEye/>
                 </button>
-                <button onClick={() => onDelete(id)} className=" flex justify-center cursor-pointer bg-red-500 hover:bg-red-600 text-white p-2 rounded-xl">
+                <button onClick={() => onDelete(data.id)} className=" flex justify-center cursor-pointer bg-red-500 hover:bg-red-600 text-white p-2 rounded-xl">
                     <BiTrash/>
                 </button>
             </div>
