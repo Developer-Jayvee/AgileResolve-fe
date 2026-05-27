@@ -1,5 +1,5 @@
-import type { Dispatch, ReactNode, SetStateAction } from "react";
-import type { StoreProjectResponseProps } from "./ProjectServiceTypes";
+import type { Dispatch, FormEvent, ReactNode, SetStateAction } from "react";
+import type { PayloadProjectProps, StoreProjectResponseProps } from "./ProjectServiceTypes";
 import type { PayloadTicketProps } from "./PayloadTypes";
 
 export interface RightModalContextProps {
@@ -26,8 +26,15 @@ export interface ProjectContextProps {
     list : Array<StoreProjectResponseProps[]>;
     setList : Dispatch<SetStateAction<StoreProjectResponseProps[]>>;
     setProjectID : Dispatch<SetStateAction<string>>;
+    handleProjectSubmit : (e : FormEvent<HTMLFormElement>) => void;
+    handleProjectInput : (key : keyof PayloadProjectProps , value : string | number) => void;
+    getProjectList : () => void;
+    errors : Array<[]>;
+    isLoading : boolean;
+    initProjectStateForm : PayloadProjectProps;
+    successMessage : string;
 }
-
+ 
 export interface TicketContextProps {
     handleSubmit : () => void;
     initStateForm: PayloadTicketProps;

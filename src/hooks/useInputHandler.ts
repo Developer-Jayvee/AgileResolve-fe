@@ -13,9 +13,6 @@ export default function useInputHandler<T>({ formData }: InputHandlerProps<T>) {
     }));
   };
   const resetForm = () => setInitStateForm(formData);
-  useEffect(() => {
-    console.log(initStateForm);
-  }, [initStateForm]);
   return {
     handleInput,
     initStateForm,

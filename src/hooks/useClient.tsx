@@ -8,12 +8,22 @@ import useTicket from "./useTicket";
 
 
 export default function useClient() {
-    const [projectID , setProjectID] = useState<string>("");
+    const [projectID, setProjectID] = useState<string>("");
     const { isAuthorized } = useAuthorizeRoute()
-    const { getProjectList, response } = useProjectHandler();
-    const { modalComponent , modalPosition , modalProps , modalSize ,open , close } = useModal()
+    const { modalComponent, modalPosition, modalProps, modalSize, open, close } = useModal()
     const [projectList, setProjectList] = useState<StoreProjectResponseProps[]>([initStoreResponse]);
-    const { formResponse , handleSubmit , initStateForm ,formLoading , handleInput } = useTicket({
+    const { 
+        getProjectList,
+        handleSubmit : handleProjectSubmit,
+        handleInput : handleProjectInput,
+        errors,
+        isLoading,
+        initStateForm : initProjectStateForm,
+        successMessage
+    } = useProjectHandler({
+            setProjectList
+        });
+    const { formResponse, handleSubmit, initStateForm, formLoading, handleInput } = useTicket({
         projectID
     });
 
@@ -25,34 +35,42 @@ export default function useClient() {
         list: projectList,
         setList: setProjectList,
         setProjectID,
-    }), [projectList,projectID]);
-    
-    const ticketContext = useMemo( () => ({
+        handleProjectSubmit,
+        handleProjectInput,
+        getProjectList,
+        errors,
+        isLoading,
+        initProjectStateForm,
+        successMessage
+    }), [projectList, initProjectStateForm, projectID]);
+
+    const ticketContext = useMemo(() => ({
         handleSubmit,
         initStateForm,
         formLoading,
         handleInput,
-    }),[initStateForm]);
+    }), [initStateForm]);
 
-    useEffect( () => {
-        if(formResponse){
-            setProjectList( 
-                (prev) => prev.map( (data) => 
-                    formResponse.projects_id == data.id ? 
-                    { ...data ,
-                        tickets: [...data.tickets,formResponse]
-                    } : data
+    useEffect(() => {
+        if (formResponse) {
+            setProjectList(
+                (prev) => prev.map((data) =>
+                    formResponse.projects_id == data.id ?
+                        {
+                            ...data,
+                            tickets: [...data.tickets, formResponse]
+                        } : data
                 )
             );
         }
-    },[formResponse])
- 
-  
+    }, [formResponse])
+
+
     return {
         isAuthorized,
-        getProjectList, response,
+        getProjectList,
         setProjectList,
-        closeModal : close,
+        closeModal: close,
         setProjectID,
         modalPosition,
         modalComponent,

@@ -1,10 +1,16 @@
-import {  useState, type FormEvent } from "react";
+import {  useState, type Dispatch, type FormEvent, type SetStateAction } from "react";
 import useInputHandler from "./useInputHandler";
 import type { StoreProjectResponseProps, PayloadProjectProps } from "@/types/ProjectServiceTypes";
 import { ProjectService } from "@/services/ProjectService";
 
-export default function useProjectHandler(){
+interface ProjectHandlerProps {
+    setProjectList ?: Dispatch<SetStateAction<StoreProjectResponseProps[]>>;
+}
+export default function useProjectHandler({
+    setProjectList = () => []
+} : ProjectHandlerProps){
     const formData = {
+        id : undefined,
         category : null,
         title : "",
         description : "",
@@ -13,20 +19,51 @@ export default function useProjectHandler(){
     const [errors , setErrors] = useState([]);
     const [successMessage,setSuccessMessage] = useState<string | null>(null);
     const [isLoading ,setIsLoading] = useState<boolean>(false);
-    const [response,setResponse] = useState<StoreProjectResponseProps[]>([]);
     const { handleInput , initStateForm , setInitStateForm } = useInputHandler<PayloadProjectProps>({formData})
-    
+    const [projectID , setProjectID] = useState<number | null>(9);
+
     const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setErrors([]);
         setIsLoading(true);
         setSuccessMessage(null)
+        try {
+            projectID ? 
+                await updateCallback(ProjectService.update(projectID,initStateForm)) :
+                await createCallback(ProjectService.create(initStateForm))
+        } catch (error) {
+            
+        } finally {
+            setIsLoading(false)
+        }
 
-        await ProjectService.create(initStateForm)
+    }
+    const updateCallback = async (service : any) => {
+        return await service
+        .then((result) => {
+            const {data , message} = result.data;
+            if(data){
+                setProjectList(
+                    (prev) => prev.map((project) => {
+                        console.log(project);
+                        
+                        return project.id === data.id ?
+                                data : project
+                        
+                    } 
+                    )
+                )
+            }
+            
+        });
+        
+    }
+    const createCallback = async ( service : any ) => {
+        return await service
         .then((result) => {
             const { data , message } = result.data;
             if(data){
-                setResponse( (prev) => [...prev , data ]);
+                setProjectList( (prev) => [...prev , data ]);
                 setInitStateForm(formData);
                 setSuccessMessage(result.message)
             }
@@ -37,16 +74,13 @@ export default function useProjectHandler(){
                 setErrors(errorResponse);
             }
         })
-        .finally(() => {
-            setIsLoading(false);
-        })
         
     }
     const getProjectList = async () => {
         const response = await ProjectService.list();
         const { data} = response?.data
         if(data){
-            setResponse(data);
+            setProjectList(data);
         }
     }
 
@@ -58,6 +92,7 @@ export default function useProjectHandler(){
        .then((result) => result.data)
        .catch((error) => false)
     }
+
     return {
         handleInput,
         handleSubmit,
@@ -66,7 +101,6 @@ export default function useProjectHandler(){
         successMessage,
         initStateForm,
         errors,
-        response,
         isLoading
     }
 }

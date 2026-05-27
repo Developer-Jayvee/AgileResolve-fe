@@ -11,7 +11,7 @@ import { Navigate, Outlet } from "react-router-dom";
 export default function ClientLayout(){
     const {
         isAuthorized,
-        getProjectList, response,
+        getProjectList,
         modalPosition,
         modalProps,
         modalComponent,
@@ -19,7 +19,6 @@ export default function ClientLayout(){
         modalSize,
         projectContext,
         ticketContext,
-        setProjectList,
         closeModal
     } = useClient();
   
@@ -28,7 +27,6 @@ export default function ClientLayout(){
     useEffect( () => {
         getProjectList()
     },[])
-    useEffect( () => setProjectList(response),[response])
 
 
     if(isAuthorized === null) return null;

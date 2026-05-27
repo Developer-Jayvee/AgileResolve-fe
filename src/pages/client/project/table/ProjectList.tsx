@@ -6,7 +6,7 @@ import { ProjectContext } from "@/contexts";
 
 export default function ProjectList() {
   const { list, setList } = useContext(ProjectContext);
-  const { deleteProject } = useProjectHandler();
+  const { deleteProject } = useProjectHandler({});
   const navigate = useNavigate();
   const handleDelete = async (id: number) => {
     await deleteProject(id).then((result) => {
@@ -16,7 +16,7 @@ export default function ProjectList() {
     });
   };
   const handleView = (id: number) => {
-    navigate(`view/${id}`, { replace: true });
+    navigate(`${id}`, { replace: true });
   };
   return (
     <div className="h-full grid grid-rows-[auto_1fr] gap-4">
@@ -36,7 +36,7 @@ export default function ProjectList() {
       <div className="w-full  ">
         <div className="min-h-0 h-full overflow-auto">
           <div className="max-h-0 overflow-hiddemn ">
-            {list.map((projects, index) => (
+            {list &&  list.map((projects, index) => (
               <ProjectCard
                 onView={(id: number) => handleView(id)}
                 onDelete={(id: number) => handleDelete(id)}

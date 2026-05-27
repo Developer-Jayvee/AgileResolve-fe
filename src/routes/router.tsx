@@ -35,7 +35,7 @@ export const Routes = createBrowserRouter([
                 element:<Project/>
             },
             {
-                 path:"project/view/:id",
+                 path:"project/:id",
                 element:<ViewProject/>
             },
             {
