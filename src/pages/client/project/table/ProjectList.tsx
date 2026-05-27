@@ -41,9 +41,12 @@ export default function ProjectList() {
                 onView={(id: number) => handleView(id)}
                 onDelete={(id: number) => handleDelete(id)}
                 key={index}
-                id={projects?.id}
-                title={projects?.title}
-                description={projects?.description}
+                data={{
+                  title:projects.title,
+                  description:projects.description,
+                  id: projects.id
+                }}
+               
               />
             ))}
           </div>

@@ -1,4 +1,5 @@
 import type { ModalContextProps, RightModalContextProps } from "@/types/ContextTypes";
+import type { PayloadTicketProps } from "@/types/PayloadTypes";
 import type { StoreProjectResponseProps } from "@/types/ProjectServiceTypes";
 
 export const initStoreResponse : StoreProjectResponseProps = {
@@ -32,4 +33,13 @@ export const initModalPxSizes : Record<string,string> =  {
     'lg' : 'w-[500px]',
     'xl' : 'w-[600px]',
     'auto' : 'w-auto'
+}
+
+export const initPayloadTicket : PayloadTicketProps = {
+    title : "",
+    content : "",
+    deadline : "",
+    status : "pending",
+    projects_id : "0",
+    created_by : ""
 }

@@ -1,40 +1,73 @@
-import type { ModalContextProps, ModalSize } from "@/types/ContextTypes";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import type { ModalSize } from "@/types/ContextTypes";
+import { type ComponentType, useState } from "react";
 
 
+type ModalPosition = "right" | "center";
+interface ConfigTypes {
+    component : any | null;
+    props : any,
+    position : ModalPosition;
+    size ?: ModalSize;
+}
 export default function useModal() {
 
-    const [isRightModalOpen, setRightModalOpen] = useState<boolean>(false);
-    const [isCenterModalOpen, setCenterModalOpen] = useState<boolean>(false);
-    const [modalSize, setModalSize] = useState<ModalSize>("sm");
-    const [modalContent, setModalContent] = useState<ReactNode>(<></>);
-
-    const modalContext = useMemo<ModalContextProps>(() => ({
-        rightModal: {
-            isOpen: isRightModalOpen,
-            setOpen: setRightModalOpen,
-            setChildren: setModalContent,
-            children: modalContent,
-        },
-        centerModal: {
-            isOpen: isCenterModalOpen,
-            setOpen: setCenterModalOpen,
-            setChildren: setModalContent,
-            children: modalContent,
-            size: modalSize,
-            setModalSize
-
-        }
-    }), [isRightModalOpen, isCenterModalOpen]);
-
-
-    useEffect(() => {
-        if (!isRightModalOpen || !isCenterModalOpen) {
-            setModalContent(<></>)
-        }
-    }, [isRightModalOpen, isCenterModalOpen])
-    return {
-        modalContext,
-        modalContent
+    const [modalComponent,setModalComponent] = useState<ComponentType<any> | null>(null);
+    const [modalProps ,setModalProps] = useState<any>({});
+    const [modalPosition ,setModalPosition] = useState<ModalPosition>("center");
+    const [modalSize , setModalSize] = useState<ModalSize>("sm");
+    const open = (config : ConfigTypes) => {
+        setModalComponent(() => config.component)
+        setModalProps(config.props);
+        setModalPosition(config.position);
+        setModalSize(config.size ?? 'sm');
     }
+    const close = () => {
+        setModalComponent(null);
+        setModalProps({});
+        setModalSize("sm");
+
+    }
+    return {
+        modalComponent,
+        modalProps,
+        modalPosition,
+        modalSize,
+        open,
+        close
+    }
+
+    
+    // const [isRightModalOpen, setRightModalOpen] = useState<boolean>(false);
+    // const [isCenterModalOpen, setCenterModalOpen] = useState<boolean>(false);
+    // const [modalSize, setModalSize] = useState<ModalSize>("sm");
+    // const [modalContent, setModalContent] = useState<ReactNode>(<></>);
+
+    // const modalContext = useMemo<ModalContextProps>(() => ({
+    //     rightModal: {
+    //         isOpen: isRightModalOpen,
+    //         setOpen: setRightModalOpen,
+    //         setChildren: setModalContent,
+    //         children: modalContent,
+    //     },
+    //     centerModal: {
+    //         isOpen: isCenterModalOpen,
+    //         setOpen: setCenterModalOpen,
+    //         setChildren: setModalContent,
+    //         children: modalContent,
+    //         size: modalSize,
+    //         setModalSize
+
+    //     }
+    // }), [isRightModalOpen, isCenterModalOpen]);
+
+
+    // useEffect(() => {
+    //     if (!isRightModalOpen || !isCenterModalOpen) {
+    //         setModalContent(<></>)
+    //     }
+    // }, [isRightModalOpen, isCenterModalOpen])
+    // return {
+    //     modalContext,
+    //     modalContent
+    // }
 }
