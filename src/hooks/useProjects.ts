@@ -11,7 +11,7 @@ import axios from "axios";
 
 export default function useProjects(){
     const [list ,setList] = useState<ProjectResponseProps[]>([]);
-    const {  initStateForm  , handleInput } = useInputHandler<NewProjectDataProps>({ formData : NewProjectData });
+    const {  initStateForm  , handleInput ,resetForm } = useInputHandler<NewProjectDataProps>({ formData : NewProjectData });
     const [errors , setErrors] = useState<Array<string>>([]);
     const [messages,setMessages] = useState<string | null>(null);
     const [isLoading ,setIsLoading] = useState<boolean>(false);
@@ -24,8 +24,8 @@ export default function useProjects(){
             const response = await ProjectService.create(initStateForm);
             const { data , message } = await response.data;
             
-            if(response.status === 200){
-                setList( (prev) => ({ ...prev,data}) );
+            if(response){
+                setList( (prev) => [ ...prev,data] );
                 setMessages(message);
             }
         } catch (error) {
@@ -40,6 +40,7 @@ export default function useProjects(){
             }
         } finally {
             setIsLoading(false);
+            resetForm();
         }
     }
 
@@ -70,7 +71,7 @@ export default function useProjects(){
             ProjectErrors : errors,
             ProjectMessages : messages,
             ProjectHandleDelete : handleDelete
-    }),[list,errors]);
+    }),[list,errors,initStateForm,isLoading,messages]);
 
     useEffect( () => {
         const getList = async () => {

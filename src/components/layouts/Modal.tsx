@@ -27,11 +27,7 @@ export default function Modal({
                     <ModalComponent {...config.props}/>
                 </CenterModal>
             );
-        case 'right':
-            return (
-                <RightModal closeModal={closeModal}>
-                    <ModalComponent {...config.props}/>
-                </RightModal>
-                );
+        default: 
+            return null;
     }
 }

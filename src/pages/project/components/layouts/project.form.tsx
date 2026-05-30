@@ -3,7 +3,7 @@ import DefaultInputText from "@/components/DefaultInputText";
 import DefaultSelect from "@/components/DefaultSelect";
 import DefaultTextArea from "@/components/DefaultTextArea";
 import type { NewProjectDataProps } from "@/types/FormDataTypes";
-import { useEffect, type FormEvent } from "react";
+import {  type FormEvent } from "react";
 
 
 export interface ProjectFormProps {

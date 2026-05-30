@@ -7,7 +7,7 @@ export const NewProjectData : NewProjectDataProps = {
     title:"",
     description:"",
     category:"",
-    client_id: null
+    client_id: 1
 }
 export const ResponseProjectData : ProjectResponseProps  = {
         title: "",
