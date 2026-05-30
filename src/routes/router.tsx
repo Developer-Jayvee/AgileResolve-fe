@@ -2,10 +2,10 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import LoginPage from "@/pages/login";
 import ClientLayout from "@/pages/client/layouts/ClientLayout";
 import Dashboard from "@/pages/client/dasboard/Dashboard";
-import Project from "@/pages/client/project/Project";
-import Ticket from "@/pages/client/ticket/Ticket";
 import LoginLayout from "@/pages/login/layouts/LoginLayout";
-import ViewProject from "@/pages/client/project/view/ViewProject";
+import ProjectClient from "@/pages/client/project";
+import ProjectIndex from "@/pages/project";
+import ProjectView from "@/pages/project/view/project.view";
 
 export const Routes = createBrowserRouter([
     {
@@ -32,16 +32,30 @@ export const Routes = createBrowserRouter([
             },
             {
                 path:"project",
-                element:<Project/>
+                element:<ProjectClient/>,
+                children:[
+                    {
+                        index:true,
+                        element:<ProjectIndex/>
+                    },
+                    // {
+                    //     path:'list',
+                    //     element:<ProjectIndex/>
+                    // },
+                    {
+                        path:':id',
+                        element:<ProjectView/>
+                    }
+                ]
             },
-            {
-                 path:"project/:id",
-                element:<ViewProject/>
-            },
-            {
-                path:"ticket",
-                element:<Ticket/>
-            },
+            // {
+            //      path:"project/:id",
+            //     element:<ViewProject/>
+            // },
+            // {
+            //     path:"ticket",
+            //     element:<Ticket/>
+            // },
         ]
     }
 ])

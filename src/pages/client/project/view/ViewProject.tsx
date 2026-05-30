@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { StoreProjectResponseProps } from "@/types/ProjectServiceTypes";
 import ViewProjectHeader from "./ViewProjectHeader";
-import { ModalContext, ProjectContext } from "@/contexts";
+import { ModalContext } from "@/contexts";
 import { BiPlus } from "react-icons/bi";
 import TicketsTable from "../table/Ticket/TicketsTable";
-import { initStoreResponse } from "@/constants/initStates";
 import CreateTicket from "../create/CreateTicket";
 
 
 const ViewProject = () => {
+    return null;
     const { id } = useParams();
     const { list, setProjectID } = useContext(ProjectContext)
     const { open } = useContext(ModalContext);

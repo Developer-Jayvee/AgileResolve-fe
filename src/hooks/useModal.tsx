@@ -1,5 +1,5 @@
 import type { ModalSize } from "@/types/ContextTypes";
-import { type ComponentType, useState } from "react";
+import { type ComponentType, useMemo, useState } from "react";
 
 
 type ModalPosition = "right" | "center";
@@ -27,13 +27,20 @@ export default function useModal() {
         setModalSize("sm");
 
     }
+
+    const modalContextProvider = useMemo( () => ({
+        open,
+        close
+    }),[modalComponent]);
+
     return {
         modalComponent,
         modalProps,
         modalPosition,
         modalSize,
         open,
-        close
+        close,
+        modalContextProvider
     }
 
     

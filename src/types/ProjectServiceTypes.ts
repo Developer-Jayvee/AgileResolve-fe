@@ -11,6 +11,8 @@ export interface StoreProjectResponseProps {
     created_at : string;
     tickets : TicketReturnType[];
 } 
+
+
 export interface PayloadProjectProps {
     title : string;
     description : string;

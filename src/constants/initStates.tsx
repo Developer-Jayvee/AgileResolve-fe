@@ -1,8 +1,8 @@
 import type { ModalContextProps, RightModalContextProps } from "@/types/ContextTypes";
 import type { PayloadTicketProps } from "@/types/PayloadTypes";
-import type { StoreProjectResponseProps } from "@/types/ProjectServiceTypes";
+import type { PayloadProjectProps, StoreProjectResponseProps } from "@/types/ProjectServiceTypes";
 
-export const initStoreResponse : StoreProjectResponseProps = {
+export const initStoreProjectResponse : StoreProjectResponseProps = {
     id: 0,
     title : "",
     client_id : 0,
@@ -10,7 +10,17 @@ export const initStoreResponse : StoreProjectResponseProps = {
     category : 0,
     code : "",
     created_at : "",
+    tickets : []
 }
+
+
+export const initStoreProject : PayloadProjectProps = {
+    title:"",
+    description:"",
+    category:0,
+    client_id : 1
+}
+
 
 export const initModal : RightModalContextProps  = {
     isOpen : false,

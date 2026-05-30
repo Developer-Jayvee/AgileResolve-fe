@@ -19,7 +19,7 @@ export default function AsideBar(){
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/client/project" className="p-2 py-4  hover:bg-active-link hover:font-bold transition-all text-[14px] flex gap-2 items-center">
+                        <NavLink to="/client/project/" className="p-2 py-4  hover:bg-active-link hover:font-bold transition-all text-[14px] flex gap-2 items-center">
                             <LiaProjectDiagramSolid/>
                             <span>Projects</span>
                         </NavLink>
