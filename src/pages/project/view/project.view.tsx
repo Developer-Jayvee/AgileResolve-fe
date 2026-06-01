@@ -24,8 +24,6 @@ export default function ProjectView(){
     return <div className=" h-full p-2">
             <div className="grid grid-rows-[150px_1fr] w-full h-full bg-white border border-gray-300 shadow-2xl">
                 <ProjectViewHeader data={{
-                    title: info.title,
-                    description: info.description,
                     created_at: info.created_at
                 }} />
                 <div className="h-full p-3">

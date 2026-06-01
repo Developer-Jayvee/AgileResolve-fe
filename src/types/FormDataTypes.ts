@@ -3,6 +3,6 @@
 export interface NewProjectDataProps {
     "title" : string;
     "description" : string;
-    "category" : string,
+    "category" : number | null;
     "client_id" : number | null;
 }

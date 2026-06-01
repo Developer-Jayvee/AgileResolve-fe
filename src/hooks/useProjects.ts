@@ -6,6 +6,7 @@ import { NewProjectData } from "@/constants/initProjectStates";
 import type { ProjectResponseProps } from "@/types/ResponseTypes";
 import type { ProjectContextProps } from "@/types/ContextTypes";
 import axios from "axios";
+import type { PayloadProjectProps } from "@/types/ProjectServiceTypes";
 
 
 
@@ -43,7 +44,31 @@ export default function useProjects(){
             resetForm();
         }
     }
+    const handleUpdate = async (id : number , formData : PayloadProjectProps) => {
+        setIsLoading(true);
+        try {
+            const response = await ProjectService.update(id,formData);          
+            const { data , message } = await response.data;
+            if(response){
+                console.log(formData);
+                
+                setList( (prev) => prev.map( (data) => data.id == id ? {...data,...formData} : data));
+                setMessages(message);
+            }
+        } catch (error) {
+            if(axios.isAxiosError(error)){
+                const err = error.response?.data;
+                if(err){
+                    setErrors(err.error);
+                } 
+            }else {
+                setErrors((prev) => [...prev,error?.message]);
 
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    }
     const handleDelete = async (id : number) => {
         setIsLoading(true);
         try {
@@ -70,7 +95,8 @@ export default function useProjects(){
             ProjectList : list,
             ProjectErrors : errors,
             ProjectMessages : messages,
-            ProjectHandleDelete : handleDelete
+            ProjectHandleDelete : handleDelete,
+            ProjectHandleUpdate : handleUpdate,
     }),[list,errors,initStateForm,isLoading,messages]);
 
     useEffect( () => {
@@ -107,7 +133,8 @@ export default function useProjects(){
        messages,
        isLoading,
        handleSubmit,
-       projectContextProvider
+       projectContextProvider,
+       
 
     }
 }

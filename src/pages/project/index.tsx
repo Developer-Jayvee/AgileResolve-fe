@@ -54,7 +54,9 @@ export default function ProjectIndex() {
                 <CreateProject config={{
                     errors: ProjectErrors,
                     messages: ProjectMessages,
-                    isLoading: isProjectLoading 
+                    isLoading: isProjectLoading,
+                    title: "New Project",
+                    description: "Propose a new project" 
                 }} 
                 formData={ProjectInitState}
                 handleChange={ProjectHandleInput}

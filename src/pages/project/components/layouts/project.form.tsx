@@ -11,6 +11,8 @@ export interface ProjectFormProps {
         errors: any;
         messages: any;
         isLoading : boolean;
+        title : string;
+        description : string;
     };
     formData : NewProjectDataProps;
     handleChange : (key : keyof NewProjectDataProps , value : number | string) => void;
@@ -22,8 +24,8 @@ export default function ProjectForm({
     return (
             <>
                 <div className="">
-                    <h1 className="font-medium text-2xl">New Project</h1>
-                    <p className="font-light text-sm">Propose a new project </p>
+                    <h1 className="font-medium text-2xl">{config.title}</h1>
+                    <p className="font-light text-sm">{config.description} </p>
                 </div>
                 <div className=" mt-5  h-full">
                     <form onSubmit={onSubmit} className="flex flex-col gap-2">

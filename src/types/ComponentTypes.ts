@@ -1,4 +1,4 @@
-import type { ChangeEvent, Dispatch, ReactNode } from "react";
+import type { ChangeEvent, Dispatch, ReactNode, SetStateAction } from "react";
 
 export type ButtonTypes = "button" | "submit" | "reset" | undefined;
 export type InputTextTypes = "text" | "password";
@@ -36,11 +36,11 @@ export interface PageLinksProps {
   isActive?: boolean;
 }
 
-export interface RightModalProps {
-  isOpen?: boolean;
-  children: ReactNode;
+export interface DefaultModalProps {
+    children : ReactNode | null;
+    setModalOpen? : Dispatch<SetStateAction<boolean>>;
+    isModalOpen? : boolean;
 }
-
 export interface DefaultInputTextProps {
   isHorizontal?: boolean;
   label: LabelProps;

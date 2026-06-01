@@ -1,14 +1,10 @@
 import { RiCloseFill } from "react-icons/ri";
-import {  type Dispatch, type ReactNode, type SetStateAction } from "react";
+import type { DefaultModalProps } from "@/types/ComponentTypes";
 
-interface RightModalProps {
-    children : ReactNode | null;
-    setModalOpen? : Dispatch<SetStateAction<boolean>>;
-    isModalOpen? : boolean;
-}
+
 export default function RightModal({
     children, setModalOpen, isModalOpen = false
-} : RightModalProps) {
+} : DefaultModalProps) {
     if(!isModalOpen) return null
     
     return <div className="fixed top-0 bottom-0 left-0 right-0 bg-black/50 ">

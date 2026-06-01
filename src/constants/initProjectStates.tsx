@@ -1,12 +1,12 @@
 import type { ProjectContextProps } from "@/types/ContextTypes";
-import type { NewProjectDataProps } from "@/types/FormDataTypes";
+import type { PayloadProjectProps } from "@/types/ProjectServiceTypes";
 import type { ProjectResponseProps } from "@/types/ResponseTypes";
 
 
-export const NewProjectData : NewProjectDataProps = {
+export const NewProjectData : PayloadProjectProps = {
     title:"",
     description:"",
-    category:"",
+    category:null,
     client_id: 1
 }
 export const ResponseProjectData : ProjectResponseProps  = {

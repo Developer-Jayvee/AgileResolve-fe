@@ -5,7 +5,7 @@ export interface ProjectResponseProps extends TimeStampProps{
     title: string;
     client_id: number;
     description: string;
-    category: string;
+    category: number | null;
     code: string;
     id: number;
 }
