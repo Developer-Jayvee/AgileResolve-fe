@@ -6,12 +6,14 @@ export default function DefaultTextArea({
     textarea,
     label,
     isRequired,
-    hasErrors
+    hasErrors,
+    customClass
 } : DefaultTextAreaProps) {
   
   return (
     <div className={`
         flex gap-2 
+        ${customClass ?? ''}
         ${isHorizontal ?'' :'flex-col'}
         `
     }>
@@ -22,7 +24,7 @@ export default function DefaultTextArea({
         placeholder={textarea.placeholder}
         value={textarea.defaultTextAreaValue}
         onChange={(e) => textarea.onChangeInput?.(e)}
-        className="border h-full border-gray-300 p-2"
+        className={`${textarea.customClass ?? ''} p-2 border h-full border-gray-300`}
       >
       </textarea>
       {

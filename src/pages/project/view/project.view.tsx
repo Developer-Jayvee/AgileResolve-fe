@@ -1,23 +1,25 @@
-import useProjects from "@/hooks/useProjects";
 import ProjectViewHeader from "./project.header";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import type { ProjectResponseProps } from "@/types/ResponseTypes";
 import { ResponseProjectData } from "@/constants/initProjectStates";
-import TicketTable from "@/pages/ticket/list/ticket.table";
+import TicketTableHeader from "@/pages/ticket/list/ticket.table.header";
+import { ProjectContext } from "@/contexts";
+import TicketTableData from "@/pages/ticket/list/ticket.table.data";
 
 
 export default function ProjectView(){
-    const { list } = useProjects();
+    const navigate = useNavigate()
+    const { ProjectList } = useContext(ProjectContext)
     const { id  } = useParams();
     const [info ,setInfo] = useState<ProjectResponseProps | null>(ResponseProjectData);
 
     useEffect( () => {
-        if(id && list) {
-            setInfo(list.find( (data) => data.id == Number(id)) ?? null);
+        if(id && ProjectList) {
+            setInfo(ProjectList.find( (data) => data.id == Number(id)) ?? null);
         }
-    },[id,list])
+    },[id,ProjectList])
 
     if(!info) return null;
 
@@ -30,14 +32,15 @@ export default function ProjectView(){
                     <div className="w-full flex flex-col gap-5">
                         <div className="flex justify-end">
                             <div>
-                                <button  className="flex items-center gap-2 disabled:bg-blue-400 bg-primary hover:bg-secondary rounded-sm  text-white p-2 text-[14px]">
+                                <button onClick={() => navigate("/client/ticket/create",{replace:true})} className="flex items-center gap-2 disabled:bg-blue-400 bg-primary hover:bg-secondary rounded-sm  text-white p-2 text-[14px]">
                                     <BiPlus />
                                     <p>Create Ticket</p>
                                 </button>
                             </div>
                         </div>
-                        <TicketTable/>
-                        {/* <TicketsTable list={projectInfo.tickets} /> */}
+                        <TicketTableHeader>
+                            { info.tickets && info.tickets.map( (items,index) => ( <TicketTableData items={items} count={++index}/>)) }
+                        </TicketTableHeader>
                     </div>
                 </div>
             </div>

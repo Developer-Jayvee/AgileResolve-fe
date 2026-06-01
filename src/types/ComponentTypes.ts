@@ -65,6 +65,7 @@ export interface DefaultTextAreaProps extends Omit<DefaultInputTextProps,"input"
         placeholder : string;
         onChangeInput?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
     }
+    customClass ?: string;
 };
 export interface SelectOptionProps {
   keyValue : string;

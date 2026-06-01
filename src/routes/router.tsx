@@ -6,6 +6,10 @@ import LoginLayout from "@/pages/login/layouts/LoginLayout";
 import ProjectClient from "@/pages/client/project";
 import ProjectIndex from "@/pages/project";
 import ProjectView from "@/pages/project/view/project.view";
+import TicketClient from "@/pages/client/ticket";
+import TicketIndex from "@/pages/ticket";
+import TicketView from "@/pages/ticket/view/ticket.view";
+import TicketCreate from "@/pages/ticket/create/ticket.create";
 
 export const Routes = createBrowserRouter([
     {
@@ -38,24 +42,30 @@ export const Routes = createBrowserRouter([
                         index:true,
                         element:<ProjectIndex/>
                     },
-                    // {
-                    //     path:'list',
-                    //     element:<ProjectIndex/>
-                    // },
                     {
                         path:':id',
                         element:<ProjectView/>
                     }
                 ]
             },
-            // {
-            //      path:"project/:id",
-            //     element:<ViewProject/>
-            // },
-            // {
-            //     path:"ticket",
-            //     element:<Ticket/>
-            // },
+            {
+                path:"ticket",
+                element:<TicketClient/>,
+                children: [
+                    {
+                        index:true,
+                        element: <TicketIndex/>
+                    },
+                    {
+                        path:":id",
+                        element:<TicketView/>
+                    },
+                    {
+                        path:"create",
+                        element:<TicketCreate/>
+                    }
+                ]
+            }
         ]
     }
 ])

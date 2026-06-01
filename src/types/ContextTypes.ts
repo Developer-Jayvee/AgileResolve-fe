@@ -1,7 +1,7 @@
 import type { Dispatch, FormEvent, ReactNode, SetStateAction } from "react";
 import type { PayloadTicketProps } from "./PayloadTypes";
 import type { NewProjectDataProps } from "./FormDataTypes";
-import type { ProjectResponseProps } from "./ResponseTypes";
+import type { ProjectResponseProps, TicketResponseProps } from "./ResponseTypes";
 import type { PayloadProjectProps } from "./ProjectServiceTypes";
 
 export interface RightModalContextProps {
@@ -35,10 +35,9 @@ export interface ProjectContextProps {
     ProjectHandleDelete : (id : number) => void;
     ProjectHandleUpdate : (id : number , formData : PayloadProjectProps) => void;
 }
+
  
 export interface TicketContextProps {
-    handleSubmit : () => void;
-    initStateForm: PayloadTicketProps;
-    formLoading : boolean;
-    handleInput : (key: keyof PayloadTicketProps,value : string | number) => void;
+    ticketList : TicketResponseProps[];
+    ticketIsLoading : boolean;
 }

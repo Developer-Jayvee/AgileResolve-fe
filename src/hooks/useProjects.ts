@@ -99,28 +99,28 @@ export default function useProjects(){
             ProjectHandleUpdate : handleUpdate,
     }),[list,errors,initStateForm,isLoading,messages]);
 
-    useEffect( () => {
-        const getList = async () => {
-            setIsLoading(true)
-            try {
-                const response = await ProjectService.list();
-                const { data , message } = await response.data
-                if(data){
-                    setList(data)
-                    setMessages(message);
-                }
-            } catch (error) {
-                if(error instanceof Error){
-                    setErrors( (prev) => [...prev,error.message]);
-                }
-            } finally {
-                setIsLoading(false);
+    const getList = async () => {
+        setIsLoading(true)
+        try {
+            const response = await ProjectService.list();
+            const { data , message } = await response.data
+            if(data){
+                setList(data)
+                setMessages(message);
             }
+        } catch (error) {
+            if(error instanceof Error){
+                setErrors( (prev) => [...prev,error.message]);
+            }
+        } finally {
+            setIsLoading(false);
         }
-
+    }
+    useEffect( () => {
         getList();
-
-      
+        return () => {
+            setList([])
+        }
     },[])
     
 

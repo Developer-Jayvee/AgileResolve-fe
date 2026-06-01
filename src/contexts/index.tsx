@@ -1,5 +1,6 @@
 import { ProjectContextStates } from "@/constants/initProjectStates";
 import { initModal, initPayloadTicket } from "@/constants/initStates";
+import { TicketListState } from "@/constants/initTicketStates";
 import { type TicketContextProps, type ModalContextProps,type ProjectContextProps } from "@/types/ContextTypes";
 import { createContext } from "react";
 
@@ -13,9 +14,6 @@ export const ProjectContext = createContext<ProjectContextProps>(ProjectContextS
 
 
 export const TicketContext = createContext<TicketContextProps>({
-    handleInput: () => false,
-    handleSubmit: () => false,
-    initStateForm: initPayloadTicket,
-    formLoading :false
-
+    ticketList : TicketListState,
+    ticketIsLoading: false
 });

@@ -10,8 +10,9 @@ export default function DefaultInputText({
   return (
     <div
       className={`
+            
             flex gap-2
-            ${isHorizontal ? "" : "flex-col"}
+            ${isHorizontal ? "items-center" : "flex-col"}
         `}
     >
       <label className={`${label.labelCustomClass ?? "font-semibold text-lg"}`}>
@@ -24,7 +25,7 @@ export default function DefaultInputText({
         onChange={(e) => input.onChangeInput?.(e)}
         name={input.defaultName}
         value={input.defaultValue}
-        className={`${input.customClass ?? "border border-gray-300 p-2"}`}
+        className={`${input.customClass ?? "border border-gray-300 p-2 w-full"}`}
         type="text"
         placeholder={input.placeholder}
       />

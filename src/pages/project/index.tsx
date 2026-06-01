@@ -7,15 +7,6 @@ import ProjectList from "./list/project.list";
 import RightModal from "@/components/layouts/RightModal";
 import {ProjectContext} from "@/contexts";
 
-//  config : {
-//         errors: any;
-//         messages: any;
-//         isLoading : boolean;
-//     };
-//     formData : NewProjectDataProps;
-//     handleChange : (key : keyof NewProjectDataProps , value : number | string) => void;
-//     onSubmit : (e : FormEvent<HTMLFormElement>) => void;
-
 
 export default function ProjectIndex() {
     const { 
