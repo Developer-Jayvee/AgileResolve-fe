@@ -32,7 +32,7 @@ export default function ProjectView(){
                     <div className="w-full flex flex-col gap-5">
                         <div className="flex justify-end">
                             <div>
-                                <button onClick={() => navigate("/client/ticket/create",{replace:true})} className="flex items-center gap-2 disabled:bg-blue-400 bg-primary hover:bg-secondary rounded-sm  text-white p-2 text-[14px]">
+                                <button onClick={() => navigate(`/client/ticket/create/${id}`,{replace:true})} className="flex items-center gap-2 disabled:bg-blue-400 bg-primary hover:bg-secondary rounded-sm  text-white p-2 text-[14px]">
                                     <BiPlus />
                                     <p>Create Ticket</p>
                                 </button>

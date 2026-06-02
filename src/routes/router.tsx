@@ -61,7 +61,7 @@ export const Routes = createBrowserRouter([
                         element:<TicketView/>
                     },
                     {
-                        path:"create",
+                        path:"create/:project_id",
                         element:<TicketCreate/>
                     }
                 ]

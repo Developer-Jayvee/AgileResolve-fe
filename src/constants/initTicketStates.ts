@@ -1,3 +1,4 @@
+import type { PayloadTicketProps } from "@/types/PayloadTypes";
 import type { TicketResponseProps } from "@/types/ResponseTypes";
 
 
@@ -19,3 +20,13 @@ export const ResponseTicketState : TicketResponseProps  = {
     "type" : 0
 }
 export const TicketListState : TicketResponseProps[] = [ResponseTicketState]
+
+export const PayloadTicketState : PayloadTicketProps = {
+    title:"",
+    content:"",
+    deadline:"",
+    projects_id:null,
+    created_by:null,
+    status:"pending"
+
+}
