@@ -5,16 +5,21 @@ import { createContext, type ReactNode } from "react";
 interface ProviderProps {
     children : ReactNode;
 }
-
-export const TicketContext = createContext<TicketContextProps | null>(null);
+export interface ExtendedTicketContextProps  extends TicketContextProps{
+    clearInitState : () => void;
+}
+export const TicketContext = createContext<ExtendedTicketContextProps | null>(null);
 
 
 export default function TicketContextProvider({ children } : ProviderProps){
 
-    const { ticketContextProvider } = useTickets()
+    const { ticketContextProvider , ticketResetForm } = useTickets()
 
     
-    return <TicketContext.Provider value={ticketContextProvider}>
+    return <TicketContext.Provider value={{
+        ...ticketContextProvider,
+        clearInitState: ticketResetForm
+    }}>
         {children}
     </TicketContext.Provider>
 }

@@ -78,6 +78,21 @@ export default function useTickets(){
             throw error;
         }
     }
+    const handleDelete = async ( id : number ) => {
+        setLoading(true);
+        try {
+            const response = await TicketService.delete(id);
+            if(response){
+                setList( (prev) => prev.filter((item) => item.id !== id));
+                navigate(`/client/project/${projects_id}`);
+                resetForm();
+            }
+        } catch (error) {
+            ErrorWrapperUtil({error , setErrorState : setErrors});
+        } finally {
+            setLoading(false)
+        }
+    }
     const ticketContextProvider = useMemo<TicketContextProps>( () => ({
         ticketList : list,
         ticketErrors : errors,
@@ -87,6 +102,7 @@ export default function useTickets(){
         ticketSetInitStateForm : setInitStateForm,
         ticketHandleSubmit: handleSumbit,
         ticketSetProjectID : setProjectID,
+        ticketDelete : handleDelete
     }),[list,isLoading,initStateForm]);
 
 
@@ -111,5 +127,6 @@ export default function useTickets(){
         ticketInitStateForm : initStateForm,
         ticketHandleSubmit: handleSumbit,
         ticketSetProjectID : setProjectID,
+        ticketResetForm : resetForm
     }
 }

@@ -1,13 +1,16 @@
 import Button from "@/components/Button";
 import DefaultInputText from "@/components/DefaultInputText";
 import DefaultTextArea from "@/components/DefaultTextArea";
+import type { ExtendedTicketContextProps } from "@/contexts/TicketFormContext";
 import useTicketProvider from "@/hooks/useTicketProvider";
-import type { TicketContextProps } from "@/types/ContextTypes";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 export default function FormLayout() {
-  const { project_id , ticket_id } = useParams<{ project_id : string; ticket_id ?: string; }>();
+  const { project_id, ticket_id } = useParams<{
+    project_id: string;
+    ticket_id?: string;
+  }>();
   const {
     ticketHandleSubmit,
     ticketInitStateForm,
@@ -16,26 +19,38 @@ export default function FormLayout() {
     ticketSetProjectID,
     ticketIsLoading,
     ticketSetInitStateForm,
-    ticketList
-  } = useTicketProvider() as TicketContextProps;
+    ticketList,
+    clearInitState,
+    ticketDelete,
+  } = useTicketProvider() as ExtendedTicketContextProps;
 
+  const clear = () => {
+    const action = confirm("Are you sure you want to clear fields?");
+    if (!action) return;
+    clearInitState();
+  };
+  const deleteBtn = async () => {
+    const action = confirm("Are you sure you want to continue?");
+    if (!action) return;
+    ticketDelete(Number(ticket_id));
+  };
   useEffect(() => ticketSetProjectID(Number(project_id)), [project_id]);
 
   useEffect(() => {
-    if(ticket_id && ticketList){
-        const details = ticketList.find( (data) => data.id == Number(ticket_id));
-        if(!details) return; 
-        ticketSetInitStateForm({
-            title: details?.title,
-            content: details?.content,
-            deadline: details?.deadline,
-            projects_id: details?.projects_id,
-            created_by : details?.created_by,
-            status: details?.status,
-            id : details.id
-        })
+    if (ticket_id && ticketList) {
+      const details = ticketList.find((data) => data.id == Number(ticket_id));
+      if (!details) return;
+      ticketSetInitStateForm({
+        title: details?.title,
+        content: details?.content,
+        deadline: details?.deadline,
+        projects_id: details?.projects_id,
+        created_by: details?.created_by,
+        status: details?.status,
+        id: details.id,
+      });
     }
-  },[ticket_id,ticketList])
+  }, [ticket_id, ticketList]);
   if (!project_id) return <p>Loading...</p>;
 
   return (
@@ -48,7 +63,10 @@ export default function FormLayout() {
           </div>
         </div>
         <div className="grow  h-full p-2 w-full  ">
-          <form onSubmit={ticketHandleSubmit} className="h-full flex flex-col gap-5">
+          <form
+            onSubmit={ticketHandleSubmit}
+            className="h-full flex flex-col gap-5"
+          >
             <div className="grid grid-cols-[1fr_auto] gap-x-10">
               <div>
                 <DefaultInputText
@@ -112,7 +130,19 @@ export default function FormLayout() {
               </div>
             </div>
             <div className="flex justify-end gap-2 items-end">
+              {
+                ticket_id && (
+                  <Button
+                    onClick={() => deleteBtn()}
+                    buttonText="Delete"
+                    buttonType="button"
+                    customClass="py-1 px-4 bg-red-500 text-white rounded-md"
+                  />
+
+                ) 
+              }
               <button
+                onClick={() => clear()}
                 type="button"
                 className="py-1 px-4 bg-yellow-500  text-white rounded-md "
               >

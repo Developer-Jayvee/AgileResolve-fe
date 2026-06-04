@@ -3,7 +3,7 @@ import type { PayloadTicketProps } from "./PayloadTypes";
 import type { NewProjectDataProps } from "./FormDataTypes";
 import type { ProjectResponseProps, TicketResponseProps } from "./ResponseTypes";
 import type { PayloadProjectProps } from "./ProjectServiceTypes";
-import type { HandleFormSubmit, HandleInputTypes } from "./GlobalTypes";
+import type { HandleDeleteType, HandleFormSubmit, HandleInputTypes } from "./GlobalTypes";
 
 export interface RightModalContextProps {
     isOpen : boolean;
@@ -47,4 +47,5 @@ export interface TicketContextProps {
     ticketHandleSubmit : HandleFormSubmit;
     ticketErrors : Array<string>;
     ticketSetProjectID: Dispatch<SetStateAction<number | null>>;
+    ticketDelete : HandleDeleteType;
 }
