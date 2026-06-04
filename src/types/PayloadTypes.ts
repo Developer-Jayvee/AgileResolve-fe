@@ -2,6 +2,7 @@
 export type TicketStatusTypes = "accepted" | "rejected" | "pending";
 
 export interface PayloadTicketProps {
+    id ?: undefined | number;
     title : string;
     content : string;
     deadline : string;

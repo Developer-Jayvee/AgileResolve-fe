@@ -43,6 +43,7 @@ export interface TicketContextProps {
     ticketIsLoading : boolean;
     ticketHandleInput : HandleInputTypes<PayloadTicketProps,string | number>;
     ticketInitStateForm : PayloadTicketProps;
+    ticketSetInitStateForm : Dispatch<SetStateAction<PayloadTicketProps>>;
     ticketHandleSubmit : HandleFormSubmit;
     ticketErrors : Array<string>;
     ticketSetProjectID: Dispatch<SetStateAction<number | null>>;

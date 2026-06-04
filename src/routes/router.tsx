@@ -10,6 +10,9 @@ import TicketClient from "@/pages/client/ticket";
 import TicketIndex from "@/pages/ticket";
 import TicketView from "@/pages/ticket/view/ticket.view";
 import TicketCreate from "@/pages/ticket/create/ticket.create";
+import TicketForm from "@/pages/ticket/layouts/ticket.form";
+import TicketUpdate from "@/pages/ticket/update/ticket.update";
+import FormLayout from "@/pages/ticket/layouts/form.layout";
 
 export const Routes = createBrowserRouter([
     {
@@ -63,6 +66,11 @@ export const Routes = createBrowserRouter([
                     {
                         path:"create/:project_id",
                         element:<TicketCreate/>
+                    },
+                    {
+                        path:"form/:project_id/:ticket_id?",
+                        element:<FormLayout/>,
+                    
                     }
                 ]
             }

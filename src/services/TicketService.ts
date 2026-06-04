@@ -15,7 +15,7 @@ const TicketService
   create: async (payload: PayloadTicketProps) =>
     await axiosInstance.post(PREFIX, payload),
   delete: async (id: number) => await axiosInstance.delete(`${PREFIX}/${id}`),
-  update: async (id: number) => await axiosInstance.patch(`${PREFIX}/${id}`),
+  update: async (id: number,payload : PayloadTicketProps) => await axiosInstance.patch(`${PREFIX}/${id}`,payload),
 };
 
 export default TicketService;

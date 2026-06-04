@@ -1,11 +1,9 @@
-import { TicketContext } from "@/contexts";
-import useTickets from "@/hooks/useTickets";
+import TicketContextProvider from "@/contexts/TicketFormContext";
 import { Outlet } from "react-router-dom";
 
 
 export default function TicketClient(){
-    const { ticketContextProvider } = useTickets()
-    return <TicketContext.Provider value={ticketContextProvider}>
+    return <TicketContextProvider>
         <Outlet/>
-    </TicketContext.Provider>
+    </TicketContextProvider>
 }

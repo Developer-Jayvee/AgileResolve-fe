@@ -40,17 +40,42 @@ export default function useTickets(){
         e.preventDefault();
         setLoading(true);
         try{
+            if(initStateForm.id !== undefined) await updateCallBack();
+            else await createCallBack();
+           
+        } catch(err) {
+            ErrorWrapperUtil({error : err , setErrorState : setErrors});
+        } finally {
+            setLoading(false);
+        }
+    }
+    const createCallBack = async () => {
+        try {
             const response = await TicketService.create(initStateForm);
             const { data , message } = await response?.data;
             if(data){
                 setList( (prev) => [...prev,data]);
                 resetForm();
-                navigate(-1)
+                navigate(`/client/project/${projects_id}`);
             }
-        } catch(err) {
-            ErrorWrapperUtil({error : err , setErrorState : setErrors});
-        } finally {
-            setLoading(false);
+        } catch (error) {
+            throw error;
+        }
+    }
+    const updateCallBack = async () => {
+        try {
+            if(!initStateForm.id) throw new Error("Missing Ticket ID.");
+            const response = await TicketService.update(Number(initStateForm.id),initStateForm);
+            const { data , message } =  await response?.data;
+            console.log(data);
+            
+            if(data) {
+                setList( (prev) => prev.map( (items) => items.id == initStateForm.id ? data : items  ));
+                navigate(`/client/project/${projects_id}`);
+                resetForm();
+            }
+        } catch (error) {
+            throw error;
         }
     }
     const ticketContextProvider = useMemo<TicketContextProps>( () => ({
@@ -59,6 +84,7 @@ export default function useTickets(){
         ticketIsLoading : isLoading,
         ticketHandleInput: handleInput,
         ticketInitStateForm : initStateForm,
+        ticketSetInitStateForm : setInitStateForm,
         ticketHandleSubmit: handleSumbit,
         ticketSetProjectID : setProjectID,
     }),[list,isLoading,initStateForm]);
@@ -79,6 +105,11 @@ export default function useTickets(){
     return {
         ticketList : list,
         ticketIsLoading : isLoading,
-        ticketContextProvider
+        ticketContextProvider,
+        ticketErrors : errors,
+        ticketHandleInput: handleInput,
+        ticketInitStateForm : initStateForm,
+        ticketHandleSubmit: handleSumbit,
+        ticketSetProjectID : setProjectID,
     }
 }

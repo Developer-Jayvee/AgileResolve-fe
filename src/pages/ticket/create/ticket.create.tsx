@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import TicketCreateLayout from "./layouts/ticket.create.layout";
+import TicketForm from "../layouts/ticket.form";
 import { TicketContext } from "@/contexts";
 import { useParams } from "react-router-dom";
 
@@ -11,7 +11,8 @@ export default function TicketCreate(){
         ticketHandleInput,
         ticketHandleSubmit,
         ticketIsLoading,
-        ticketSetProjectID
+        ticketSetProjectID,
+        ticketErrors
     } = useContext(TicketContext);
 
     useEffect(() => {
@@ -19,7 +20,8 @@ export default function TicketCreate(){
     },[project_id])
 
     if(!project_id) return null;
-    return <TicketCreateLayout
+    return <TicketForm
+            errors={ticketErrors}
             handleInput={ticketHandleInput}
             handleSubmit={ticketHandleSubmit}
             initStateForm={ticketInitStateForm}

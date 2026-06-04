@@ -1,4 +1,5 @@
 import type { PrimaryKeyProps, TimeStampProps, UserStampProps } from "./DefaultTypes";
+import type { TicketStatusTypes } from "./PayloadTypes";
 
 
 export interface ProjectResponseProps extends TimeStampProps{
@@ -17,7 +18,7 @@ export interface TicketResponseProps extends UserStampProps , PrimaryKeyProps{
     deadline : string;
     description: string;
     projects_id: number;
-    status: "pending" | "open";
+    status: TicketStatusTypes;
     priority: number;
     type: number;
 }
